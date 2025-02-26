@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react"
 import RenderHeader from "../components/structure/Header"
+import { RenderMenu, RenderRoutes } from "../components/structure/RenderNavigation";
 
 const AuthContext = createContext();
 const AuthData = () => useContext(AuthContext);
@@ -31,6 +32,8 @@ const AuthWrapper = () => {
         <AuthContext.Provider value={{user, login, logout}} >
             <>
                 <RenderHeader />
+                <RenderMenu />
+                <RenderRoutes />
             </>
         </AuthContext.Provider>
     )
