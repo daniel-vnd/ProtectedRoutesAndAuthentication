@@ -1,6 +1,11 @@
 import { useReducer, useState } from "react"
 import { useNavigate } from 'react-router-dom'
 import { AuthData } from '../../auth/AuthWrapper'
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
 
 const Login = () => {
 
@@ -21,21 +26,34 @@ const Login = () => {
   }
 
   return (
-    <div className='page'>
-      <h2>Login page</h2>
-      <div className="inputs">
-        <div className="input">
-          <input name="userName" type="text" defaultValue={formData.userName}  onChange={(e) => setFormData({userName: e.target.value})}/>
-        </div>
-        <div className="input">
-          <input name="password" type="password" defaultValue={formData.password}  onChange={(e) => setFormData({password: e.target.value})}/>
-        </div>
-        <div className="button">
-          <button onClick={() => doLogin()}>Log in</button>
-        </div>
-        {errorMessage ? <div className="error">{errorMessage}</div> : null}
+
+  <Container fluid class="justify-content-between">
+      <div className="title-holder">
+          <h2>Login Page</h2>
+          <div className='subtitle'>Get connected with us</div>
       </div>
-    </div>
+
+      <Form className='contact-form'>
+        <Row>
+            <Col sm={12}>
+                <Form.Control name="userName" type="text" defaultValue={formData.userName} placeholder="Username" onChange={(e) => setFormData({userName: e.target.value})} required />
+            </Col>
+          </Row>
+          <Row>
+            <Col sm={12}>
+                <Form.Control name="password" type='password' defaultValue={formData.password}  onChange={(e) => setFormData({password: e.target.value})} placeholder="Password" required />
+            </Col>
+        </Row>
+        
+        {errorMessage ? (<Row><Col sm={12} className="bg-warning">{errorMessage}</Col></Row>) : null}
+        
+        <Row>
+          <Col sm={12}>
+            <Button variant="primary" type='button' onClick={doLogin} >Submit</Button>
+          </Col>
+        </Row>
+    </Form>
+  </Container>
   )
 }
 

@@ -1,11 +1,17 @@
-import React from 'react'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const Private = () => {
   return (
-    <div className='page'>
-      <h2>Members area</h2>
-      <p>This is the private members area</p>
-    </div>
+    <Container fluid>
+      <Row>
+        <Col md={12}>
+        <h2>Members area</h2>
+        <p>his is the private members area</p>
+        </Col>
+      </Row>
+  </Container>
   )
 }
 

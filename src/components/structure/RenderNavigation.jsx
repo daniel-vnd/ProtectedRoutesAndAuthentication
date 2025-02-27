@@ -1,6 +1,9 @@
 import { Link, Routes, Route } from "react-router-dom";
 import { AuthData } from '../../auth/AuthWrapper'
-import { nav } from './navigation'
+import { nav } from '../structure/navigation'
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 
 
 const RenderRoutes = () => {
@@ -35,30 +38,42 @@ const RenderMenu = () => {
 
 
   return (
-    <div className="menu">
-      {
-        nav.map((r, i) => {
-          if (! r.isPrivate && r.isMenu){
-            return (
-              <MenuItem key={i} r={r} />
-            )
-          } else if (user.isAuthenticated && r.isMenu) {
-            return (
-              <MenuItem key={i} r={r} />
-            )
-          } else {
-            return false;
-          }
-        })
-      }
+    <Navbar expand="lg" className="bg-body-tertiary">
+      <Container>
+      <Navbar.Brand href="#home">Authentication tutorial</Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav" class="ms-auto justify-content-end">
+          <Nav className="me-auto">
+              {
+                nav.map((r, i) => {
+                  if (! r.isPrivate && r.isMenu){
+                    return (
+                      <Nav.Link href={r.path}>{r.name}</Nav.Link>
+                    )
+                  } else if (user.isAuthenticated && r.isMenu) {
+                    return (
+                      <Nav.Link href={r.path}>{r.name}</Nav.Link>
+                    )
+                  } else {
+                    return false;
+                  }
+                })
+              }
 
-      {
-        user.isAuthenticated ? 
-        <div className="menuItem"><Link to={'#'} onClick={logout}>Log Out</Link></div>
-        :
-        <div className="menuItem"><Link to={'/login'} onClick={logout}>Log In</Link></div>
-      }
-    </div>
+              {
+                user.isAuthenticated ? 
+                <Nav.Link href="/">Log Out</Nav.Link>
+                :
+                <Nav.Link href="/login">Log In</Nav.Link>
+              }
+          </Nav>
+      </Navbar.Collapse>
+      </Container>
+  </Navbar>
+
+    
+      
+    
   )
 }
 
